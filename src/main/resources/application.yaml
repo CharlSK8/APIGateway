@@ -1,0 +1,57 @@
+server:
+  port: 9092 
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/auth/**
+        
+        - id: usuario-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/usuario/**
+          filters:
+            - AuthenticationFilterFactory
+        
+        - id: transactions-service
+          uri: http://localhost:8093
+          predicates:
+            - Path=/api/v1/transacciones/**
+          filters:
+          - AuthenticationFilterFactory  
+          
+        - id: cuenta-bancaria-service
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/v1/cuenta-bancaria/**, /api/v1/movimiento/**
+          filters:
+            - AuthenticationFilterFactory
+
+  activemq:
+    broker-url: tcp://localhost:61616
+    user: admin
+    password: admin
+    packages:
+      trust-all: false
+      trusted:
+      - com.users.auth_api.entity
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: "env,beans"
+  endpoint:
+    health:
+      show-details: always
+
+
+application:
+  security:
+    jwt:
+      secret-key: McvbIKwPayThmKBwFUdHDXzvvFileA2Zvja8JrcCsVNwRP19UVAiNW7G2EFmVK2hnHSI
