@@ -7,12 +7,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.springframework.stereotype.Service;
 
+import com.banco.gateway.record.TokenStatus;
 import com.banco.gateway.service.ITokenCacheService;
 
 @Service
 public class TokenCacheServiceImpl implements ITokenCacheService{
 
-    private final Cache<String, Boolean> tokenCache;
+    private final Cache<String, TokenStatus> tokenCache;
 
     public TokenCacheServiceImpl() {
         this.tokenCache = Caffeine.newBuilder()
@@ -23,18 +24,30 @@ public class TokenCacheServiceImpl implements ITokenCacheService{
 
     @Override
     public void addToken(String token) {
-        tokenCache.put(token, true);
-        
+        TokenStatus status = new TokenStatus(false, false);
+        tokenCache.put(token, status);
     }
 
     @Override
     public boolean isTokenValid(String token) {
-        return tokenCache.getIfPresent(token) != null;
+        TokenStatus status = tokenCache.getIfPresent(token);
+        return status != null && !status.isExpired() && !status.isRevoked();
     }
 
     @Override
     public void removeToken(String token) {
         tokenCache.invalidate(token);
+    }
+
+    @Override
+    public void markTokenAsRevokedAndExpired(String token) {
+        TokenStatus status = new TokenStatus(true, true);
+        tokenCache.put(token, status);
+    }
+
+    @Override
+    public TokenStatus getTokenStatus(String token) {
+        return tokenCache.getIfPresent(token);
     }
 
 }
