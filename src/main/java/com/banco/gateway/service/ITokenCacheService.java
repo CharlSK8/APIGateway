@@ -1,7 +1,5 @@
 package com.banco.gateway.service;
 
-import java.util.Map;
-
 import com.banco.gateway.record.TokenStatus;
 
 public interface ITokenCacheService {
