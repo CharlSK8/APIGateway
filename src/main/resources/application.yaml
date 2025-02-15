@@ -20,7 +20,7 @@ spring:
         - id: transactions-service
           uri: http://localhost:8093
           predicates:
-            - Path=/api/v1/transacciones/**
+            - Path=/api/v1/transacciones/**, /api/v1/auditoria/**
           filters:
           - AuthenticationFilterFactory  
           
