@@ -30,7 +30,14 @@ spring:
             - Path=/api/v1/cuenta-bancaria/**, /api/v1/movimiento/**
           filters:
             - AuthenticationFilterFactory
-
+      globalcors:
+          cors-configurations:
+            '[/**]':
+              allowed-origins: "http://localhost:4200"
+              allowed-methods: "GET,POST,PUT,DELETE,OPTIONS"
+              allowed-headers: "*"
+              allow-credentials: true
+              max-age: 3600
   activemq:
     broker-url: tcp://localhost:61616
     user: admin
@@ -39,6 +46,12 @@ spring:
       trust-all: false
       trusted:
       - com.users.auth_api.entity
+  jms:
+    pub-sub-domain: true
+
+  output:
+    ansi:
+      enabled: ALWAYS
 
 management:
   endpoints:

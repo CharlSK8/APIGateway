@@ -1,9 +1,13 @@
 package com.banco.gateway.service;
 
+import com.banco.gateway.record.TokenStatus;
+
 public interface ITokenCacheService {
 
-    public void addToken(String token);
-    public boolean isTokenValid(String token);
-    public void removeToken(String token);
+    void addToken(String token);
+    boolean isTokenValid(String token);
+    void removeToken(String token);
+    void markTokenAsRevokedAndExpired(String token);
+    TokenStatus getTokenStatus(String token);
 
 }

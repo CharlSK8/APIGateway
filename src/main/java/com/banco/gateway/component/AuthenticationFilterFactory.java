@@ -17,13 +17,10 @@ import org.springframework.web.server.ServerWebExchange;
 
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SignatureException;
-import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.http.HttpHeaders;
@@ -33,6 +30,7 @@ import org.springframework.stereotype.Component;
 
 import reactor.core.publisher.Mono;
 
+import com.banco.gateway.record.TokenStatus;
 import com.banco.gateway.service.ITokenCacheService;
 
 @Slf4j
@@ -73,23 +71,27 @@ public class AuthenticationFilterFactory extends AbstractGatewayFilterFactory<Au
 
     private Mono<Void> handleTokenValidation(ServerWebExchange exchange, GatewayFilterChain chain, String token) {
         if (!tokenCacheService.isTokenValid(token)) {
-            log.info("Token no encontrado en cache. Validando con JWT...");
-    
+            log.info("Token no encontrado en cache o invalido. Validando con JWT..."); 
             try {
+                TokenStatus tokenStatus = tokenCacheService.getTokenStatus(token);
+                if (tokenStatus != null && (tokenStatus.isRevoked() || tokenStatus.isExpired())) {
+                    log.info("Token revocado y expirado. No se permite la solicitud.");
+                    return unauthorizedResponse(exchange, "Token revocado y expirado", HttpStatus.UNAUTHORIZED);
+                }
                 if (validateJwtToken(token)) {
-                    log.info("Token valido. Guardando en cache.");
+                    log.info("Token JWT valido. Guardando en cache.");
                     tokenCacheService.addToken(token);
                 } else {
-                    log.info("Token invalido o expirado. No se agrega a la cache.");
+                    log.info("Token JWT invalido o expirado. No se agrega a la cache.");
                     return unauthorizedResponse(exchange, "Token JWT invalido o expirado", HttpStatus.UNAUTHORIZED);
                 }
             } catch (JwtException | IllegalArgumentException e) {
-                log.error("Error al validar el token: {}", e.getMessage());
-                return unauthorizedResponse(exchange, "Token JWT inválido", HttpStatus.UNAUTHORIZED);
+                log.error("Error al validar el token JWT: {}", e.getMessage());
+                return unauthorizedResponse(exchange, "Token JWT invalido", HttpStatus.UNAUTHORIZED);
             }
         }
     
-        log.info("Token valido. Continuando...");
+        log.info("Token valido. Continuando con la solicitud...");
         return chain.filter(exchange);
     }
 
