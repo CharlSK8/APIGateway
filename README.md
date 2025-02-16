@@ -52,7 +52,7 @@ Este documento proporciona los pasos para obtener, ejecutar y administrar un con
 - **Correr el contenedor**
 
     ```sh
-    podman run --rm --name reactivo --network=red-bank -p 9092:9092 -d operaciones-bancarias
+    podman run --rm --name reactivo --network=red-bank -p 9092:9092 -d APIGateway
     ```
 
 ## Componentes Principales
