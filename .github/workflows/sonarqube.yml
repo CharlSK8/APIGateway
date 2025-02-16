@@ -83,7 +83,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tag Docker Image
-        run: docker tag gateway:v1.0.0 ghcr.io/${{ github.repository_owner }}/gateway:v1.0.0
+        run: docker tag gateway:v1.0.0 ghcr.io/charlsk8/gateway:v1.0.0
 
       - name: Push Docker Image to GHCR
-        run: docker push ghcr.io/${{ github.repository_owner }}/gateway:v1.0.0
+        run: docker push ghcr.io/charlsk8/gateway:v1.0.0
