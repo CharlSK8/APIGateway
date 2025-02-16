@@ -88,7 +88,7 @@ El API Gateway enruta las solicitudes a diferentes microservicios y aplica el fi
 - Usuario Service (/api/v1/usuario/**): Requiere autenticación JWT.
 - Transactions Service (/api/v1/transacciones/**, /api/v1/auditoria/**): Requiere autenticación JWT.
 - Cuenta Bancaria Service (/api/v1/cuenta-bancaria/**, /api/v1/movimiento/**): Requiere autenticación JWT.
-- 
+  
 
 ### Tecnologías Utilizadas
 
