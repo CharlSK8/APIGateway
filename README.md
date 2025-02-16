@@ -68,6 +68,8 @@ Este filtro de seguridad valida los tokens JWT en las solicitudes entrantes y lo
 
 Ubicación: `src/main/java/com/banco/gateway/component/MessageConsumer.java`
 
+Este componente escucha eventos de autenticación, como cierre de sesión, a través de ActiveMQ y actualiza la caché de tokens en consecuencia.
+
 ### 3. TokenCacheServiceImpl
 
 Ubicación: `src/main/java/com/banco/gateway/service/impl/TokenCacheServiceImpl.java`
