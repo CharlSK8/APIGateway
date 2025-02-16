@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  activemq:
+    image: apache/activemq-classic
+    container_name: activemq-broker
+    ports:
+      - "61616:61616"
+      - "8161:8161"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  backend:
+    image: gateway
+    container_name: gateway
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+    depends_on:
+      - activemq
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
