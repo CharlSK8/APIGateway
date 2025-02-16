@@ -71,7 +71,7 @@ public class AuthenticationFilterFactory extends AbstractGatewayFilterFactory<Au
 
     private Mono<Void> handleTokenValidation(ServerWebExchange exchange, GatewayFilterChain chain, String token) {
         if (!tokenCacheService.isTokenValid(token)) {
-            log.info("Token no encontrado en caché o inválido. Validando con JWT..."); 
+            log.info("Token no encontrado en cache o invalido. Validando con JWT..."); 
             try {
                 TokenStatus tokenStatus = tokenCacheService.getTokenStatus(token);
                 if (tokenStatus != null && (tokenStatus.isRevoked() || tokenStatus.isExpired())) {
@@ -83,7 +83,7 @@ public class AuthenticationFilterFactory extends AbstractGatewayFilterFactory<Au
                     tokenCacheService.addToken(token);
                 } else {
                     log.info("Token JWT invalido o expirado. No se agrega a la cache.");
-                    return unauthorizedResponse(exchange, "Token JWT inválido o expirado", HttpStatus.UNAUTHORIZED);
+                    return unauthorizedResponse(exchange, "Token JWT invalido o expirado", HttpStatus.UNAUTHORIZED);
                 }
             } catch (JwtException | IllegalArgumentException e) {
                 log.error("Error al validar el token JWT: {}", e.getMessage());
