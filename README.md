@@ -39,12 +39,7 @@ Este documento proporciona los pasos para obtener, ejecutar y administrar un con
     ```sh
     podman run --rm --name reactivo --network=red-bank -p 9092:9092 -d ghcr.io/charlsk8/APIGateway:v1.0.0 
     ```
-
-- **Probar la Aplicación**
-
-    ```sh
-    curl http://localhost:8093/api/v1/auditoria/stream?cuentaId=1198031672
-    ```
+    
 
 ## Generar imagen local
 
