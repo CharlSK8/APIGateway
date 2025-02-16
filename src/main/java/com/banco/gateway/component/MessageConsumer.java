@@ -22,7 +22,7 @@ public class MessageConsumer {
     private final ITokenCacheService tokenCacheService;
     private final ObjectMapper objectMapper;
 
-    @JmsListener(destination = "auth-queue", containerFactory = "jmsListenerContainerFactory")
+    @JmsListener(destination = "auth-topic", containerFactory = "jmsListenerContainerFactory")
     public void messageListener(Object eventMessage) {
         try {
             String jsonMessage = extractMessageContent(eventMessage);
@@ -32,7 +32,7 @@ public class MessageConsumer {
 
             if ("LOGOUT".equalsIgnoreCase(event.getEventType())) {
                 tokenCacheService.markTokenAsRevokedAndExpired(event.getToken());
-                log.info("Token {} marcado como revocado y expirado en caché", event.getToken());
+                log.info("Token {} marcado como revocado y expirado en cache", event.getToken());
             }
 
         } catch (JsonProcessingException e) {
