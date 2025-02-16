@@ -86,6 +86,18 @@ El API Gateway enruta las solicitudes a diferentes microservicios y aplica el fi
 - Transactions Service (/api/v1/transacciones/**, /api/v1/auditoria/**): Requiere autenticación JWT.
 - Cuenta Bancaria Service (/api/v1/cuenta-bancaria/**, /api/v1/movimiento/**): Requiere autenticación JWT.
 
+### Tecnologías Utilizadas
+
+- **Java 17**: Lenguaje de programación principal utilizado para desarrollar la aplicación.
+- **Spring Boot**: Framework utilizado para crear aplicaciones basadas en Spring de manera rápida y sencilla.
+- **JWT**: Implementación de autenticación y autorización segura mediante tokens JWT.
+- **ActiveMQ**: Broker de mensajería utilizado para la comunicación asincrónica entre servicios.
+- **Lombok**: Herramienta que reduce el código boilerplate mediante anotaciones.
+- **Spring Cloud Gateway**: Framework de Spring para construir API Gateways escalables y flexibles, permitiendo enrutamiento inteligente y filtrado de solicitudes.
+- **Caffeine**: Biblioteca de caché de alto rendimiento para Java, que proporciona almacenamiento en memoria con estrategias eficientes de expiración y eliminación.
+- **Podman**: Herramienta para la gestión de contenedores sin necesidad de un demonio en segundo plano, compatible con Docker y enfocada en la seguridad.
+
+
 ## Diagrama de Componentes
 
 ![image](https://github.com/user-attachments/assets/5b3d4176-34dc-4b47-b505-0ec0c89c3a54)
