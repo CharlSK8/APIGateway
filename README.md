@@ -57,6 +57,7 @@ Este documento proporciona los pasos para obtener, ejecutar y administrar un con
 
 ## Componentes Principales
 
+
 ### 1. AuthenticationFilterFactory
 
 Ubicación: `src/main/java/com/banco/gateway/component/AuthenticationFilterFactory.java`
@@ -73,11 +74,13 @@ Ubicación: `src/main/java/com/banco/gateway/service/impl/TokenCacheServiceImpl.
 
 Este servicio administra la caché de tokens utilizando Caffeine para almacenar tokens válidos y evitar verificaciones innecesarias con JWT.
 
+
 ## Configuración de Rutas
 
 Ubicación: src/main/resources/application.yml
 
 El API Gateway enruta las solicitudes a diferentes microservicios y aplica el filtro de autenticación donde es necesario.
+
 
 ## Rutas Configuradas
 
@@ -85,6 +88,7 @@ El API Gateway enruta las solicitudes a diferentes microservicios y aplica el fi
 - Usuario Service (/api/v1/usuario/**): Requiere autenticación JWT.
 - Transactions Service (/api/v1/transacciones/**, /api/v1/auditoria/**): Requiere autenticación JWT.
 - Cuenta Bancaria Service (/api/v1/cuenta-bancaria/**, /api/v1/movimiento/**): Requiere autenticación JWT.
+- 
 
 ### Tecnologías Utilizadas
 
