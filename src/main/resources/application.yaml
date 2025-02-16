@@ -38,7 +38,6 @@ spring:
               allowed-headers: "*"
               allow-credentials: true
               max-age: 3600
-
   activemq:
     broker-url: tcp://localhost:61616
     user: admin
@@ -47,6 +46,12 @@ spring:
       trust-all: false
       trusted:
       - com.users.auth_api.entity
+  jms:
+    pub-sub-domain: true
+
+  output:
+    ansi:
+      enabled: ALWAYS
 
 management:
   endpoints:
