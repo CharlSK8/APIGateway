@@ -31,13 +31,13 @@ Este documento proporciona los pasos para obtener, ejecutar y administrar un con
 - **Descargar la imagen desde GHCR**
 
     ```sh
-    podman pull ghcr.io/charlsk8/APIGateway:v1.0.0 
+    podman pull ghcr.io/charlsk8/gateway:v1.0.0
     ```
 
 - **Correr el contenedor**
 
     ```sh
-    podman run --rm --name reactivo --network=red-bank -p 9092:9092 -d ghcr.io/charlsk8/APIGateway:v1.0.0 
+    podman run --rm --name gateway --network=red-bank -p 9092:9092 -d ghcr.io/charlsk8/gateway:v1.0.0
     ```
     
 
