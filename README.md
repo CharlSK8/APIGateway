@@ -106,6 +106,6 @@ El API Gateway enruta las solicitudes a diferentes microservicios y aplica el fi
 
 ## Diagrama de Componentes
 
-![image](https://github.com/user-attachments/assets/5b3d4176-34dc-4b47-b505-0ec0c89c3a54)
+![WhatsApp Image 2025-02-17 at 2 18 23 PM](https://github.com/user-attachments/assets/c8eda983-bca0-4dae-8c0d-591cb9a7e3b8)
 
 
